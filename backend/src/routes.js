@@ -3,8 +3,13 @@ const axios = require('axios');
 
 const routes = Router();
 
-routes.post('/devs', (request, response) => {
+routes.post('/devs', async (request, response) => {
     const { github_username } = request.body;
+
+    const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+
+    console.log(apiResponse.data);
+
     return response.json( { 
         message: 'Hi, heloooo!!'
     } );
