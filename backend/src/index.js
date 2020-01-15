@@ -10,5 +10,6 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@clusterbeni-kuxbe.gcp.mongod
 });
 
 app.use(express.json());
+app.use(routes);
 
 app.listen(3333);
