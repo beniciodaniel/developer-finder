@@ -4,7 +4,6 @@ main {
 }
 
 main ul {
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -22,10 +21,6 @@ li.dev-item {
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
     border-radius: 2px;
     padding: 20px;
-}
-
-li.dev-item p {
-    width: 100%;
 }
 
 li.dev-item header {
