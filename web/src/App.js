@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import './global.css';
 import './App.css';
@@ -6,6 +7,9 @@ import './Sidebar.css';
 import './Main.css';
 
 function App() {
+  const [github_username, setGithubUsername] = useState('');
+  const [techs, setTechs] = useState('');
+
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
 
@@ -28,20 +32,43 @@ function App() {
     );
   }, []);
 
+  async function handleAddDev(event) {
+    event.preventDefault();
+
+    const response = await api.post('/devs', {
+      github_username,
+      techs,
+      latitude,
+      longitude
+    });
+
+    console.log(response.data)
+  }
+
   return (
     <div id="app">
       <aside>
         <strong>Register</strong>
 
-        <form>
+        <form onSubmit={handleAddDev}>
           <div className="input-block">
             <label htmlFor="github_username">Username from GitHub</label>
-            <input name="github_username" id="github_username" required />
+            <input 
+              name="github_username" 
+              id="github_username" required 
+              value={github_username}
+              onChange={event => setGithubUsername(event.target.value)}
+              />
           </div>
 
           <div className="input-block">
             <label htmlFor="techs">Technologies</label>
-            <input name="techs" id="techs" required />
+            <input 
+              name="techs" 
+              id="techs" required 
+              value={techs}
+              onChange={event => setTechs(event.target.value)}
+              />
           </div>
 
           <div className="input-group">
