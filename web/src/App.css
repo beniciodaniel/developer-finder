@@ -7,3 +7,7 @@
     flex-direction: row;
     align-items: flex-start;  /* to start and stay at the top */
 }
+
+#app main {
+    margin-left: 30px;
+}
