@@ -7,9 +7,10 @@ import './Sidebar.css';
 import './Main.css';
 
 function App() {
+  const [devs, setDevs] = useState([]);
+
   const [github_username, setGithubUsername] = useState('');
   const [techs, setTechs] = useState('');
-
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
 
@@ -32,6 +33,16 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get('/devs');
+      
+      setDevs(response.data);
+    }
+
+    loadDevs();
+  }, []);
+
   async function handleAddDev(event) {
     event.preventDefault();
 
@@ -42,7 +53,10 @@ function App() {
       longitude
     });
 
-    console.log(response.data)
+    setGithubUsername('');
+    setTechs('');
+
+    setDevs([...devs, response.data]);
   }
 
   return (
@@ -100,54 +114,19 @@ function App() {
 
       <main>
         <ul>
-          <li className="dev-item">
+          {devs.map(dev => (
+            <li key={dev._id} className="dev-item">
             <header>
-              <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
+              <img src={dev.avatar_url} alt={dev.name} />
               <div className="user-info">
-                <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js</span>
+                <strong>{ dev.name }</strong>
+                <span> {dev.techs.join(', ')} </span>
               </div>
             </header>
-            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
+            <p> {dev.bio} </p>
+            <a href={`https://github.com/${dev.github_username}`} >Access GitHub profile</a>
           </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
-              <div className="user-info">
-                <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
-              <div className="user-info">
-                <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
-              <div className="user-info">
-                <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
-          </li>
-          
+          ))}        
         </ul>
       </main>
     </div>
