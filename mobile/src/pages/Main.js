@@ -24,11 +24,14 @@ function Main() {
                     longitudeDelta: 0.04,
                 })
             }
-            
         }
 
         loadInitialPosition();
     }, []);
+
+    if (!currentRegion) {
+        return null;
+    }
 
     return <MapView initialRegion={currentRegion} style={styles.map} />
 }
