@@ -3,6 +3,7 @@ import React from 'react';
 import './global.css';
 import './App.css';
 import './Sidebar.css';
+import './Main.css';
 
 function App() {
 
@@ -44,11 +45,11 @@ function App() {
               <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
               <div className="user-info">
                 <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js, Laravel</span>
-                <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-                <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
+                <span>ReactJS, React Native, Node.js</span>
               </div>
             </header>
+            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
+            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
           </li>
 
           <li className="dev-item">
@@ -56,11 +57,11 @@ function App() {
               <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
               <div className="user-info">
                 <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js, Laravel</span>
-                <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-                <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
+                <span>ReactJS, React Native, Node.js</span>
               </div>
             </header>
+            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
+            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
           </li>
 
           <li className="dev-item">
@@ -68,11 +69,11 @@ function App() {
               <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
               <div className="user-info">
                 <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js, Laravel</span>
-                <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-                <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
+                <span>ReactJS, React Native, Node.js</span>
               </div>
             </header>
+            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
+            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
           </li>
 
           <li className="dev-item">
@@ -80,12 +81,13 @@ function App() {
               <img src="https://avatars1.githubusercontent.com/u/52285940?s=460&v=4" alt="Benício Daniel"/>
               <div className="user-info">
                 <strong>Benício Daniel</strong>
-                <span>ReactJS, React Native, Node.js, Laravel</span>
-                <p>Developer and Architect (Master in Civil Construction Engineering)</p>
-                <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
+                <span>ReactJS, React Native, Node.js</span>
               </div>
             </header>
+            <p>Developer and Architect (Master in Civil Construction Engineering)</p>
+            <a href="https://github.com/beniciodaniel">Access GitHub profile</a>
           </li>
+          
         </ul>
       </main>
     </div>
