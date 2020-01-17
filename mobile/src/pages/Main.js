@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import api from '../services/api';
+
 function Main( { navigation} ) {
+    const [devs, setDevs] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
+    const [techs, setTechs] = useState('');
 
     useEffect(() => {
         async function loadInitialPosition() {
@@ -30,26 +34,61 @@ function Main( { navigation} ) {
         loadInitialPosition();
     }, []);
 
+    async function loadDevs() {
+        const { latitude, longitude } = currentRegion;
+
+        const response = await api.get('/search', {
+            params: {
+                latitude,
+                longitude,
+                techs
+            }
+        });
+        console.log(response.data.devs)
+        setDevs(response.data.devs);
+    }
+
+    function handleRegionChanged(region) {
+        // console.log(region);
+        setCurrentRegion(region);
+    }
+
     if (!currentRegion) {
         return null;
     }
 
     return (
         <>
-        <MapView initialRegion={currentRegion} style={styles.map}>
-            <Marker coordinate={{latitude: -25.4662313, longitude: -49.2877396}}>
-                <Image style={styles.avatar} source={{ uri: 'https://avatars1.githubusercontent.com/u/52285940?s=460&v=4'}} />
-                <Callout onPress={ () => {
-                    navigation.navigate('Profile', { github_username: 'beniciodaniel' });
-                }} >
-                    <View style={styles.callout}>
-                        <Text style={styles.devName}>Benício Daniel</Text>
-                        <Text style={styles.devBio}>Developer and Architect (Master in Civil Construction Engineering)</Text>
-                        <Text style={styles.devTechs}>ReactJS, React Native, Laravel</Text>
-                    </View>
-                </Callout>
-            </Marker>
+        <MapView 
+            onRegionChangeComplete={handleRegionChanged} 
+            initialRegion={currentRegion} 
+            style={styles.map}>
+                
+            {devs.map(dev => (
+                <Marker 
+                    key={dev._id}
+                    coordinate={{
+                        longitude: dev.location.coordinates[0],
+                        latitude: dev.location.coordinates[1], 
+                    }}
+                >
+                    <Image 
+                        style={styles.avatar} 
+                        source={{ uri: dev.avatar_url }} 
+                    />
+                    <Callout onPress={ () => {
+                        navigation.navigate('Profile', { github_username: dev.github_username });
+                    }} >
+                        <View style={styles.callout}>
+                            <Text style={styles.devName}> {dev.name} </Text>
+                            <Text style={styles.devBio}> {dev.bio} </Text>
+                            <Text style={styles.devTechs}> {dev.techs.join(', ')} </Text>
+                        </View>
+                    </Callout>
+                </Marker>
+            ))}
         </MapView>
+        
         <View style={styles.searchForm}>
             <TextInput 
                 style={styles.searchInput}
@@ -57,9 +96,11 @@ function Main( { navigation} ) {
                 placeholderTextColor="#999"
                 autoCapitalize="words"
                 autoCorrect={false}
+                value={techs}
+                onChangeText={setTechs}
             />
 
-            <TouchableOpacity onPress={() => {}} style={styles.loadButton}>
+            <TouchableOpacity onPress={loadDevs} style={styles.loadButton}>
                 <MaterialIcons name="my-location" size={20} color="#FFF" />
             </TouchableOpacity>
         </View>
@@ -100,7 +141,8 @@ const styles = StyleSheet.create({
 
     searchForm: {
         position: 'absolute',
-        bottom: 20,
+        // bottom: 20,
+        top: 20,
         left: 20,
         right: 20,
         zIndex: 5,
