@@ -36,8 +36,14 @@ function Main( { navigation} ) {
     }, []);
 
     function setupWebsocket() {
+        const { latitude, longitude } = currentRegion;
+
         console.log('oi!');
-        connect();
+        connect(
+            latitude,
+            longitude,
+            techs,
+        );
     }
 
     async function loadDevs() {
