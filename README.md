@@ -33,11 +33,14 @@ yarn add axios
 yarn add cors
 ```
 
-### Inside frontend folder
+### Creating the frontend folder
 
 ```
 yarn create react-app <foldername>
+```
+#### Inside frontend folder
 
+```
 yarn start
 
 yarn add axios
