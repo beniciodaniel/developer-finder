@@ -17,7 +17,7 @@ brew install node@12
 brew install yarn --ignore-dependencies
 ```
 
-### backend folder
+### Inside backend folder
 
 ```
 yarn init -y
@@ -33,7 +33,7 @@ yarn add axios
 yarn add cors
 ```
 
-### frontend folder
+### Inside frontend folder
 
 ```
 yarn create react-app <foldername>
@@ -43,13 +43,11 @@ yarn start
 yarn add axios
 ```
 
-### mobile folder
+### Inside mobile folder
 
 ```
 yarn global add expo-cli
 ```
-
-Inside .zshrc
 ```
 code .zshrc
 ```
@@ -62,7 +60,7 @@ expo init mobile
 yarn start
 ```
 
-With a smartphone, using the Expo app, just need to scan the code.
+**_With a smartphone, using the Expo app, just need to scan the code to see the updates on screen._**
 
 ```
 yarn add react-navigation
